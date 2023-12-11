@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="meuCanvas" width="400" height="400"></canvas>
+
+	<script>
+		let canvas = document.getElementById("meuCanvas");
+		let cxt = canvas.getContext("2d");
+		let x = canvas.width / 2;
+		let y = canvas.height / 2;
+		let raio = 50;
+		let velX = 0;
+		let velY = 2;
+
+		function circle() {
+			// Limpar rastro da figura
+			cxt.clearRect(0, 0, canvas.width, canvas.height);
+			cxt.fillStyle = "purple";
+			cxt.beginPath();
+			cxt.arc(x, y, raio, 0, Math.PI * 2);
+			cxt.fill();
+
+			// Andando na tela
+			x += velX;
+			y += velY;
+
+			// Inverter direção 
+			if (x + raio > canvas.width || x - raio < 0) {
+				velX = -velX;
+			} 
+			if (y + raio > canvas.height || y - raio < 0) {
+				velY = -velY;
+			}
+			requestAnimationFrame(circle);
+		}
+
+		circle();
+	</script>
+</body>
+</html>

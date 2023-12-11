@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<button id="menuButton"> Menu </button>
+	<div id="menu">
+		<ul>
+			<li><a href="#">Item 1</a></li>
+			<li><a href="#">Item 2</a></li>
+			<li><a href="#">Item 3</a></li>
+		</ul>
+	</div>
+
+	<style> 
+		#menuButton[aria-expanded="true"]::after{
+			content: "🔼"; /*seta para cima*/
+		}
+		#menuButton[aria-expanded="false"]::after{
+			content: "🔽";/*seta para baixo*/
+		}
+		#menu[aria-hidden="false"]{
+			display: none;
+		}
+		#menu[aria-hidden="true"]{
+			display: block;
+		}
+	</style>
+
+	<script>
+		const menuButton = document.getElementById("menuButton");
+		const menu = document.getElementById("menu");
+		menuButton.addEventListener("click", () =>{
+			const expand = menuButton.getAttribute("aria-expanded") == "true";
+			menuButton.setAttribute("aria-expanded", !expand);
+			menu.setAttribute("aria-hidden", expand);
+		});
+	</script>
+</body>
+</html>
